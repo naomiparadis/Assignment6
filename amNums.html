@@ -1,0 +1,165 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Amicable Numbers</title>
+	
+<script type="text/javascript">
+	function displayNums()	
+	{
+		var num1= document.getElementById("number1").value;
+		var num2= document.getElementById("number2").value;
+		document.write("<div>Numbers: " + num1 + ", " + num2 + "</div>");
+		var numsRay = [num1, num2];
+		return numsRay;
+	}
+	
+	function isFactor(num, factor) 
+	{
+		if ((num % factor) == 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	function showArray(ray)
+	{
+		var len = ray.length;
+		var strList = "";
+		for (i=0; i<len; i++) {
+			if (strList != "") {
+				strList += ", ";
+			}
+			strList += ray[i];
+		}
+		document.write("Factors: [" + strList + "]</div>");
+	}
+	
+	function addArray(ray)
+	{
+		var sum = 0;
+		var len = ray.length;
+		for (i=0; i<len; i++) {
+			sum += ray[i];
+		}
+		return sum;
+	}
+	
+	function getFactors(num) 
+	{
+		var factors = [1]; //1 is always factor
+		if (num == 1) {
+			return factors;
+		}
+		for (i=2; i<num; i++) { //not including number itself
+			if (isFactor(num, i)) {
+				factors.push(i);
+			}
+		}
+		return factors;
+	}
+	
+	function checkAmic()
+	{
+		var numsRay = displayNums();
+		
+		var factRay1 = getFactors(numsRay[0]);
+		var factRay2 = getFactors(numsRay[1]);
+		document.write("<div> First Number ");
+		showArray(factRay1);
+		document.write("<div> Second Number ");
+		showArray(factRay2);
+		
+		
+		var sum1 = addArray(factRay1);
+		var sum2 = addArray(factRay2);
+		
+		
+		if ((sum1 == numsRay[1]) && (sum2 == numsRay[0])) {
+			document.write("<div>These numbers are amicable</div>");
+		} else {
+			document.write("<div>These numbers are not amicable</div>");
+		}
+	}
+	
+	function checkPos(num) {
+		if (num < 1) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	function validate() 
+	{
+		alert("hi");
+		document.write(document.data.number1.value);
+		if (!checkpos(document.data.number1.value)) {
+			alert("must enter whole, positive number");
+			document.data.number1.focus();
+			document.data.number1.select();
+			return false;
+		}
+		if (!checkpos(document.data.number2.value)) {
+			alert("must enter whole, positive number");
+			document.data.number2.focus();
+			document.data.number2.select();
+			return false;
+		}
+		return true;
+	}
+
+</script>
+</head>
+
+<body>
+	<div> Enter 2 whole, positive numbers</div> <br/>
+	<form name="amic numbers input" onsubmit="checkAmic()">
+		<label for="number1" > First number:</label> <br>
+		<input type="number" id="number1" name="number1" min="1" required /> <br>
+		<label for="number2"> Second number:</label> <br>
+		<input type="number" id="number2" name="number2" min="1" required /> <br>
+		<button type="submit"> Check If Amicable</button>
+	</form>
+	
+	<!-- <script type="text/javascript">
+		if (isFactor(8,2)) {
+			document.write("<div> 2 is a factor of 8 </div>");
+		} else {
+			document.write("<div> 2 is not a factor of 8 </div>");
+		}
+		if (isFactor(8,3)) {
+			document.write("<div> 3 is a factor of 8 </div>");
+		} else {
+			document.write("<div> 3 is not a factor of 8 </div>");
+		}
+		if (isFactor(10,2)) {
+			document.write("<div> 2 is a factor of 10 </div>");
+		} else {
+			document.write("<div> 2 is not a factor of 10 </div>");
+		}
+	</script> -->
+	
+	<!-- <script type="text/javascript">
+		var array = [2, 3, 4, 5, 6];
+		document.write("<div>");
+		showArray(array); //prints end of div
+	</script> -->
+
+	<!-- <script type="text/javascript">
+		var array = [2, 3, 4, 5 ,6];
+		showArray(array);
+		var raySum = addArray(array);
+		document.write("<div> sum: " + raySum + "</div>");
+	</script> -->
+	
+	<!-- <script type="text/javascript">
+		var num = 54; //should be 1, 2, 3, 6, 9, 18, 27
+		var numFactors = getFactors(num);
+		showArray(numFactors);
+	</script> -->
+	
+	
+</body>
+</html>
